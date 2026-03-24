@@ -20,11 +20,9 @@
 #### Figma 設計指南
 - Figma 設計稿創建指南（完整步驟）
 - Figma 設計系統速查表（顏色、字體、間距速查）
-- 設計系統規範（Color/Text/Spacing/Shadow Styles）
-- 組件庫搭建指南（Buttons/Inputs/Radio/Tables/Modals）
-- 頁面設計步驟（查詢輸入頁、結果展示頁）
-- 交互原型連接指南
-- Figma 插件推薦
+- Figma 模板文件結構說明（頁面組織、層級命名）
+- 首頁與結果展示頁設計說明
+- 組件庫 Figma 層級結構（每個組件的詳細規格）
 
 ### 進行中
 - 首頁設計稿（Figma）
