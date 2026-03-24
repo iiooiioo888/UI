@@ -89,6 +89,28 @@ UI/
  PRD 審查   頁面佈局    視覺設計    可點擊原型   導出資源    答疑支持
 ```
 
+## 🛠️ Figma Design Helper Skill
+
+本項目包含一個完整的 **Figma UI 設計輔助 Skill**，位於 `../skills/figma-design-helper/`
+
+**包含文件**：
+- `SKILL.md` - Skill 說明
+- `REFERENCE.md` - 速查參考（顏色、字體、快捷鍵）
+- `GUIDE.md` - 逐步操作指南（4 小時完成）
+- `README.md` - 使用說明
+
+**使用方式**：
+```bash
+# 查看 Skill 說明
+cat ../skills/figma-design-helper/SKILL.md
+
+# 查看速查參考
+cat ../skills/figma-design-helper/REFERENCE.md
+
+# 查看操作指南
+cat ../skills/figma-design-helper/GUIDE.md
+```
+
 ## 📞 聯繫方式
 
 - **設計師**：____

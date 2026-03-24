@@ -26,6 +26,13 @@
 - 管理後台與系統管理頁設計說明（完整佈局和交互）
 - 完整交互流程說明（8 個核心流程 + 異常處理）
 - Figma 設計逐步操作指南（檢查清單格式，4 小時完成）
+- Figma 設計實戰工作手冊（速查手冊，常見問題解答）
+
+#### Figma Design Helper Skill
+- 創建 Figma UI 設計輔助 Skill
+- 包含：SKILL.md, REFERENCE.md, GUIDE.md, README.md
+- 支持完整的 Figma 設計流程指導
+- 預計 4 小時完成所有設計
 
 ### 進行中
 - 首頁設計稿（Figma）
