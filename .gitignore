@@ -1,0 +1,40 @@
+# 活字格項目 .gitignore
+
+# 活字格設計器生成的臨時文件
+*.tmp
+*.temp
+*.bak
+*.log
+
+# 活字格項目導出包（只保留源文件）
+*.hmpz
+
+# 編譯輸出
+bin/
+obj/
+
+# 系統文件
+.DS_Store
+Thumbs.db
+
+# IDE 配置
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 測試數據（敏感數據不提交）
+test/敏感數據/
+test/真實保單數據.xlsx
+
+# 本地配置（每個人可能不同）
+local.config.json
+appsettings.local.json
+
+# 上傳的臨時文件
+uploads/
+downloads/
+
+# 日誌文件
+logs/
+*.log
