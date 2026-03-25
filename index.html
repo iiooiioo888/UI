@@ -422,6 +422,52 @@ td.link:hover { text-decoration: underline; }
 .action-bar .btn { font-size: 13px; height: 28px; padding: 0 12px; }
 .action-bar-right { margin-left: auto; display: flex; gap: 8px; }
 
+/* Record Cards */
+.record-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+.record-card {
+  background: var(--bg-card); border: 1px solid var(--border-light);
+  border-radius: var(--radius); padding: 20px;
+  box-shadow: var(--shadow); transition: all var(--transition);
+  position: relative; cursor: default;
+}
+.record-card:hover { border-color: var(--primary); box-shadow: 0 2px 8px rgba(24,144,255,.12); }
+.record-card.selected { border-color: var(--primary); background: #f0f8ff; }
+.record-card-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.record-card-checkbox { margin-right: 12px; margin-top: 2px; }
+.record-card-title {
+  font-size: 15px; font-weight: 600; color: var(--primary);
+  cursor: pointer; flex: 1; word-break: break-all;
+}
+.record-card-title:hover { text-decoration: underline; }
+.record-card-id {
+  font-size: 11px; color: var(--text-placeholder); background: #f5f5f5;
+  padding: 2px 8px; border-radius: 10px; margin-left: 8px; white-space: nowrap;
+}
+.record-card-meta {
+  display: grid; grid-template-columns: auto 1fr; gap: 6px 12px;
+  font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;
+}
+.record-card-meta-label { color: var(--text-placeholder); font-size: 12px; }
+.record-card-meta-value { color: var(--text-primary); }
+.record-card-actions {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding-top: 14px; border-top: 1px solid var(--border-light);
+}
+.record-card-action {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; font-size: 12px; border-radius: 4px;
+  border: 1px solid var(--border); background: var(--bg-card);
+  color: var(--text-secondary); cursor: pointer; transition: all var(--transition);
+}
+.record-card-action:hover { color: var(--primary); border-color: var(--primary); background: #f0f8ff; }
+
 /* Query bar */
 .query-bar {
   display: flex; align-items: flex-end; gap: 16px;
@@ -859,80 +905,123 @@ td.link:hover { text-decoration: underline; }
         <button class="btn btn-primary" onclick="navigate('query')">＋ 新計算</button>
         <button class="btn btn-success" onclick="showToast('重新計算完成', 'success')">🔄 重新計算</button>
         <button class="btn btn-primary" onclick="showToast('復核操作完成', 'success')">✅ 復核</button>
-        <button class="btn btn-primary" onclick="showToast('導出成功', 'success')">📥 導出</button>
-        <button class="btn btn-primary" onclick="showToast('年結表導出成功', 'success')">📊 導出年結表</button>
-        <button class="btn btn-primary" onclick="showToast('已保存到核心系統', 'success')">💾 保存到核心系統</button>
+        <button class="btn btn-warning" onclick="confirmDelete()">🗑️ 刪除</button>
         <div class="action-bar-right">
-          <button class="btn btn-warning" onclick="confirmDelete()">🗑️ 刪除</button>
           <button class="btn btn-success" onclick="showToast('操作歷史加載中...', 'success')">📋 操作歷史</button>
         </div>
       </div>
 
-      <div class="card" style="padding:0;overflow:hidden;">
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th class="table-checkbox"><input type="checkbox" class="checkbox" onchange="toggleAll(this)"></th>
-                <th>ID</th><th>Remark</th><th>OperateTime</th><th>Operator</th>
-                <th>PlanCode</th><th>PolicyNumber</th>
-                <th>退保價值</th><th>常健康</th><th>退保價值計算</th>
-                <th>保單資料</th><th>說明摘要</th><th>CCT</th><th>DCT</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="table-checkbox"><input type="checkbox" class="checkbox row-cb"></td>
-                <td>14</td>
-                <td class="link" onclick="navigate('result')">紅利抵賬.xlsx</td>
-                <td>2025/12/24 13:40:19</td><td>Administrator</td>
-                <td>1001</td><td>6806879898</td>
-                <td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td>
-                <td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td>
-              </tr>
-              <tr>
-                <td class="table-checkbox"><input type="checkbox" class="checkbox row-cb"></td>
-                <td>13</td>
-                <td class="link" onclick="navigate('result')">快智8年結表.xlsx</td>
-                <td>2025/12/23 09:15:22</td><td>Administrator</td>
-                <td>1008</td><td>6806871234</td>
-                <td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td>
-                <td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td>
-              </tr>
-              <tr>
-                <td class="table-checkbox"><input type="checkbox" class="checkbox row-cb"></td>
-                <td>12</td>
-                <td class="link" onclick="navigate('result')">閒情日至結表.xlsx</td>
-                <td>2025/12/22 16:05:11</td><td>Leong Cheng</td>
-                <td>1110</td><td>6806890001</td>
-                <td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td>
-                <td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td>
-              </tr>
-              <tr>
-                <td class="table-checkbox"><input type="checkbox" class="checkbox row-cb"></td>
-                <td>11</td>
-                <td class="link" onclick="navigate('result')">成長路儲蓄.xlsx</td>
-                <td>2025/12/21 11:30:45</td><td>Administrator</td>
-                <td>1120</td><td>6806855555</td>
-                <td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td>
-                <td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td><td class="link">👁️</td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="record-grid">
+        <!-- Card 1 -->
+        <div class="record-card" data-id="14">
+          <div class="record-card-header">
+            <input type="checkbox" class="checkbox record-card-checkbox row-cb" onchange="toggleCard(this)">
+            <span class="record-card-title" onclick="navigate('result')">紅利抵賬.xlsx</span>
+            <span class="record-card-id">#14</span>
+          </div>
+          <div class="record-card-meta">
+            <span class="record-card-meta-label">Plan Code</span><span class="record-card-meta-value">1001</span>
+            <span class="record-card-meta-label">保單號碼</span><span class="record-card-meta-value">6806879898</span>
+            <span class="record-card-meta-label">操作人</span><span class="record-card-meta-value">Administrator</span>
+            <span class="record-card-meta-label">操作時間</span><span class="record-card-meta-value">2025/12/24 13:40</span>
+          </div>
+          <div class="record-card-actions">
+            <span class="record-card-action" onclick="navigate('result')">📄 退保價值</span>
+            <span class="record-card-action" onclick="navigate('result')">🏥 常健康</span>
+            <span class="record-card-action" onclick="navigate('result')">📊 退保價值計算</span>
+            <span class="record-card-action" onclick="navigate('result')">📋 保單資料</span>
+            <span class="record-card-action" onclick="navigate('result')">📝 說明摘要</span>
+            <span class="record-card-action" onclick="navigate('result')">📈 CCT</span>
+            <span class="record-card-action" onclick="navigate('result')">📉 DCT</span>
+          </div>
         </div>
-        <div class="pagination" style="padding:12px 16px;">
-          <div class="pagination-pages">
-            <button class="page-btn" disabled>◀</button>
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn">▶</button>
+
+        <!-- Card 2 -->
+        <div class="record-card" data-id="13">
+          <div class="record-card-header">
+            <input type="checkbox" class="checkbox record-card-checkbox row-cb" onchange="toggleCard(this)">
+            <span class="record-card-title" onclick="navigate('result')">快智8年結表.xlsx</span>
+            <span class="record-card-id">#13</span>
           </div>
-          <div class="pagination-info">
-            <div class="pagination-jump">前往 <input type="number" value="1" min="1"> 頁</div>
-            <select class="page-size-select"><option>10條/頁</option><option>20條/頁</option><option>50條/頁</option></select>
-            <span>共 4 條</span>
+          <div class="record-card-meta">
+            <span class="record-card-meta-label">Plan Code</span><span class="record-card-meta-value">1008</span>
+            <span class="record-card-meta-label">保單號碼</span><span class="record-card-meta-value">6806871234</span>
+            <span class="record-card-meta-label">操作人</span><span class="record-card-meta-value">Administrator</span>
+            <span class="record-card-meta-label">操作時間</span><span class="record-card-meta-value">2025/12/23 09:15</span>
           </div>
+          <div class="record-card-actions">
+            <span class="record-card-action" onclick="navigate('result')">📄 退保價值</span>
+            <span class="record-card-action" onclick="navigate('result')">🏥 常健康</span>
+            <span class="record-card-action" onclick="navigate('result')">📊 退保價值計算</span>
+            <span class="record-card-action" onclick="navigate('result')">📋 保單資料</span>
+            <span class="record-card-action" onclick="navigate('result')">📝 說明摘要</span>
+            <span class="record-card-action" onclick="navigate('result')">📈 CCT</span>
+            <span class="record-card-action" onclick="navigate('result')">📉 DCT</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="record-card" data-id="12">
+          <div class="record-card-header">
+            <input type="checkbox" class="checkbox record-card-checkbox row-cb" onchange="toggleCard(this)">
+            <span class="record-card-title" onclick="navigate('result')">閒情日至結表.xlsx</span>
+            <span class="record-card-id">#12</span>
+          </div>
+          <div class="record-card-meta">
+            <span class="record-card-meta-label">Plan Code</span><span class="record-card-meta-value">1110</span>
+            <span class="record-card-meta-label">保單號碼</span><span class="record-card-meta-value">6806890001</span>
+            <span class="record-card-meta-label">操作人</span><span class="record-card-meta-value">Leong Cheng</span>
+            <span class="record-card-meta-label">操作時間</span><span class="record-card-meta-value">2025/12/22 16:05</span>
+          </div>
+          <div class="record-card-actions">
+            <span class="record-card-action" onclick="navigate('result')">📄 退保價值</span>
+            <span class="record-card-action" onclick="navigate('result')">🏥 常健康</span>
+            <span class="record-card-action" onclick="navigate('result')">📊 退保價值計算</span>
+            <span class="record-card-action" onclick="navigate('result')">📋 保單資料</span>
+            <span class="record-card-action" onclick="navigate('result')">📝 說明摘要</span>
+            <span class="record-card-action" onclick="navigate('result')">📈 CCT</span>
+            <span class="record-card-action" onclick="navigate('result')">📉 DCT</span>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="record-card" data-id="11">
+          <div class="record-card-header">
+            <input type="checkbox" class="checkbox record-card-checkbox row-cb" onchange="toggleCard(this)">
+            <span class="record-card-title" onclick="navigate('result')">成長路儲蓄.xlsx</span>
+            <span class="record-card-id">#11</span>
+          </div>
+          <div class="record-card-meta">
+            <span class="record-card-meta-label">Plan Code</span><span class="record-card-meta-value">1120</span>
+            <span class="record-card-meta-label">保單號碼</span><span class="record-card-meta-value">6806855555</span>
+            <span class="record-card-meta-label">操作人</span><span class="record-card-meta-value">Administrator</span>
+            <span class="record-card-meta-label">操作時間</span><span class="record-card-meta-value">2025/12/21 11:30</span>
+          </div>
+          <div class="record-card-actions">
+            <span class="record-card-action" onclick="navigate('result')">📄 退保價值</span>
+            <span class="record-card-action" onclick="navigate('result')">🏥 常健康</span>
+            <span class="record-card-action" onclick="navigate('result')">📊 退保價值計算</span>
+            <span class="record-card-action" onclick="navigate('result')">📋 保單資料</span>
+            <span class="record-card-action" onclick="navigate('result')">📝 說明摘要</span>
+            <span class="record-card-action" onclick="navigate('result')">📈 CCT</span>
+            <span class="record-card-action" onclick="navigate('result')">📉 DCT</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="card mt-16" style="display:flex;align-items:center;justify-content:space-between;">
+        <div class="pagination-pages">
+          <button class="page-btn" disabled>◀</button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">▶</button>
+        </div>
+        <div class="pagination-info">
+          <div class="pagination-jump">前往 <input type="number" value="1" min="1"> 頁</div>
+          <select class="page-size-select"><option>10條/頁</option><option>20條/頁</option><option>50條/頁</option></select>
+          <span>共 4 條</span>
         </div>
       </div>
     </div>
@@ -1147,15 +1236,27 @@ function doReset() {
   document.getElementById('otherToggle').classList.remove('open');
 }
 
-/* ═══ Table ═══ */
+/* ═══ Table / Cards ═══ */
 function toggleAll(master) {
   var cbs = document.querySelectorAll('.row-cb');
-  for (var i = 0; i < cbs.length; i++) cbs[i].checked = master.checked;
+  for (var i = 0; i < cbs.length; i++) { cbs[i].checked = master.checked; toggleCard(cbs[i]); }
+}
+function toggleCard(cb) {
+  var card = cb.closest('.record-card');
+  if (card) card.classList.toggle('selected', cb.checked);
 }
 function confirmDelete() {
   var n = document.querySelectorAll('.row-cb:checked').length;
   if (!n) { showToast('請先選擇要刪除的記錄', 'warning'); return; }
-  showModal('確認刪除', '確定要刪除所選的 ' + n + ' 條記錄嗎？此操作無法撤銷。', '確認刪除', function() { closeModal(); showToast(n + ' 條記錄已刪除', 'success'); });
+  showModal('確認刪除', '確定要刪除所選的 ' + n + ' 條記錄嗎？此操作無法撤銷。', '確認刪除', function() {
+    // Remove selected cards
+    document.querySelectorAll('.row-cb:checked').forEach(function(cb) {
+      var card = cb.closest('.record-card');
+      if (card) { card.style.opacity = '0'; card.style.transform = 'scale(.95)'; setTimeout(function() { card.remove(); }, 200); }
+    });
+    closeModal();
+    setTimeout(function() { showToast(n + ' 條記錄已刪除', 'success'); }, 250);
+  });
 }
 
 /* ═══ Toast ═══ */
